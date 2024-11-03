@@ -10,9 +10,14 @@ export default function ProductTile({ product }) {
           />
         </div>
         <div>
-          <h1 className="w-40 m-3 text-gray-700 font-bold text-lg truncate ">
+          <h1 className="w-40 truncate m-3 text-gray-700 font-bold text-lg">
             {product?.title}
           </h1>
+        </div>
+        <div className="flex items-center justify-center w-full ">
+          <button className="bg-red-950 text-white border-2 rounded-lg font-bold p-4">
+            Add to cart
+          </button>
         </div>
       </div>
     </div>
