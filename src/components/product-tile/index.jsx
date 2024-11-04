@@ -1,11 +1,15 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addedToCart } from "../../store/slices/cart-slice";
 
 export default function ProductTile({ product }) {
   const dispatch = useDispatch();
+  const { cart } = useSelector((state) => state);
 
   function handleToCart() {
-    dispatch(addedToCart());
+    dispatch(addedToCart(product));
   }
+
+  function handleRemoveFromCart() {}
   return (
     <div>
       <div className="group flex flex-col items-center border-2 border-red-900 gap-3 p-4 h-[360px] mt-10 ml-5 rounded-xl">
@@ -24,9 +28,15 @@ export default function ProductTile({ product }) {
         <div className="flex items-center justify-center w-full ">
           <button
             className="bg-red-950 text-white border-2 rounded-lg font-bold p-4"
-            onClick={() => dispatch({ type: "increment-counter" })}
+            onClick={
+              cart.some((item) => item.id === product.id)
+                ? handleRemoveFromCart
+                : handleToCart
+            }
           >
-            Add to cart
+            {cart.some((item) => item.id === product.id)
+              ? "Remove from cart"
+              : "Add to cart"}
           </button>
         </div>
       </div>
